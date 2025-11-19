@@ -9,7 +9,6 @@ ftxui-flySim
 
 
 # Build instructions:
-Open via. VS
 Windows
 ~~~bash
 mkdir build
