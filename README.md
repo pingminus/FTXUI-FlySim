@@ -14,7 +14,7 @@ cd build
 cmake ..
 make -j
 cd ../target
-./FTXUI-FlySim
+./ftxui-starter
 ~~~
 # How to Land the Plane
 
