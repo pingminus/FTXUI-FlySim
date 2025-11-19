@@ -13,8 +13,7 @@ mkdir build
 cd build
 cmake ..
 make -j
-cd ../target
-./ftxui-starter
+.\Debug\ftxui-starter.exe
 ~~~
 # How to Land the Plane
 
