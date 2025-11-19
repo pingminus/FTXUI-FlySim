@@ -16,4 +16,23 @@ make -j
 cd ../target
 ./ftxui-starter
 ~~~
+# How to Land the Plane
 
+Landing requires putting the aircraft into a stable, low-speed, low-altitude configuration directly over the 2×2 airport zone (marked with X on the map).
+
+## Landing Requirements
+
+To land successfully, ALL of the following must be true at the moment altitude reaches 0:
+
+You are directly over one of the airport tiles
+(the 2×2 landing zone at (10,10) → (11,11)).
+
+Speed below 140 kt
+
+Gear DOWN (G)
+
+Pitch greater than -5° (no steep nose-down impact)
+
+Roll less than 10° (nearly wings-level)
+
+Flaps ON (recommended but optional)
