@@ -12,7 +12,7 @@ Open via. VS or
 mkdir build
 cd build
 cmake ..
-make -j
+cmake --build . --config Debug
 .\Debug\ftxui-starter.exe
 ~~~
 # How to Land the Plane
