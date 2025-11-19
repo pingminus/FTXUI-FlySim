@@ -117,7 +117,7 @@ Color GetFuelColor(double f) {
 // =====================================================================
 // ATTITUDE INDICATOR
 // =====================================================================
-auto render_horizon = [&](double pitch, double roll) -> Element {
+auto render_horizon = [](double pitch, double roll) -> Element {
   const int rows = 9, cols = 25;
   std::vector<std::vector<Color>> cell_color(
       rows, std::vector<Color>(cols, Color::Black));
@@ -155,8 +155,8 @@ auto render_horizon = [&](double pitch, double roll) -> Element {
 // =====================================================================
 // RADAR
 // =====================================================================
-auto render_radar = [&](double sweep_angle,
-                        double destination_distance) -> Element {
+auto render_radar = [](double sweep_angle,
+                       double destination_distance) -> Element {
   const int width = 22, height = 11;
   const int cx = width / 2, cy = height / 2;
 
