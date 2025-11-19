@@ -7,13 +7,22 @@ ftxui-flySim
 
 
 # Build instructions:
-Open via. VS or
+Open via. VS
+Windows
 ~~~bash
 mkdir build
 cd build
 cmake ..
 cmake --build . --config Debug
 .\Debug\ftxui-starter.exe
+~~~
+MacOs/Linux
+~~~bash
+mkdir build
+cd build
+cmake ..
+make -j
+./ftxui-starter
 ~~~
 # How to Land the Plane
 
