@@ -11,14 +11,12 @@
 
 using namespace ftxui;
 
-std::vector<std::string> world_map = {"................", "................",
-                                      "................", "................",
-                                      "................", "................",
-                                      "................", "................",
-                                      "................", "................",
-                                      "..........XX....",  // Airport top row
-                                      "..........XX....",  // Airport bottom row
-                                      "................", "................"};
+std::vector<std::string> world_map = {
+    "................", "................", "................",
+    "................", "................", "................",
+    "................", "................", "................",
+    "................", "..........XX....", "..........XX....",
+    "................", "................"};
 
 struct Plane {
   double altitude = 2000;
@@ -44,6 +42,11 @@ struct Plane {
     if (crashed || landed)
       return;
 
+
+    if (fuel <= 0.0) {
+      throttle = 0.0;
+    }
+
     double lift = std::max(0.0, (speed / 200.0) * (1.0 + pitch / 10.0));
     double sink = 50.0 - lift * 30.0 + std::abs(roll) * 0.5;
 
@@ -53,7 +56,7 @@ struct Plane {
     speed += (throttle - 0.5) * 50.0 * dt;
     speed = std::clamp(speed, 80.0, 350.0);
 
-    fuel -= throttle * 0.007 * dt;
+    fuel -= throttle * 0.001 * dt;
     fuel = std::max(0.0, fuel);
 
     double speed_ms = speed * 0.5144;
@@ -88,6 +91,7 @@ struct Plane {
   }
 };
 
+
 Color GetSpeedColor(double s) {
   if (s < 120)
     return Color::Red;
@@ -114,9 +118,9 @@ Color GetFuelColor(double f) {
   return Color::Green;
 }
 
-// =====================================================================
+// ------------------------------
 // ATTITUDE INDICATOR
-// =====================================================================
+// ------------------------------
 auto render_horizon = [](double pitch, double roll) -> Element {
   const int rows = 9, cols = 25;
   std::vector<std::vector<Color>> cell_color(
@@ -152,9 +156,9 @@ auto render_horizon = [](double pitch, double roll) -> Element {
   return vbox(lines) | borderRounded;
 };
 
-// =====================================================================
+// ------------------------------
 // RADAR
-// =====================================================================
+// ------------------------------
 auto render_radar = [](double sweep_angle,
                        double destination_distance) -> Element {
   const int width = 22, height = 11;
@@ -197,10 +201,10 @@ auto render_radar = [](double sweep_angle,
          center;
 };
 
+
 Element render_map(const Plane& plane) {
   std::vector<Element> rows;
 
-  // heading → arrow
   double deg = fmod((plane.heading * 180.0 / M_PI) + 360.0, 360.0);
 
   std::string icon = "→";
@@ -226,15 +230,10 @@ Element render_map(const Plane& plane) {
     for (int x = 0; x < world_map[y].size(); x++) {
       if ((int)plane.map_y == y && (int)plane.map_x == x) {
         row.push_back(text(icon) | color(Color::Yellow));
-      }
-
-      // Airport 2x2
-      else if (x >= plane.dest_x && x <= plane.dest_x + 1 &&
-               y >= plane.dest_y && y <= plane.dest_y + 1) {
+      } else if (x >= plane.dest_x && x <= plane.dest_x + 1 &&
+                 y >= plane.dest_y && y <= plane.dest_y + 1) {
         row.push_back(text("X") | color(Color::Blue) | bold);
-      }
-
-      else {
+      } else {
         row.push_back(text(std::string(1, world_map[y][x])));
       }
     }
@@ -244,24 +243,20 @@ Element render_map(const Plane& plane) {
   return vbox(rows) | borderRounded | color(Color::Green);
 }
 
-// =====================================================================
+// ==============================
 // MAIN UI
-// =====================================================================
+// ==============================
 int main() {
   auto screen = ScreenInteractive::Fullscreen();
   Plane plane;
   std::atomic<bool> running = true;
 
-  // Buttons
   Component gear_button =
       Button("Toggle Gear", [&] { plane.gear_down = !plane.gear_down; });
   Component flaps_button =
       Button("Toggle Flaps", [&] { plane.flaps = !plane.flaps; });
   auto buttons = Container::Horizontal({gear_button, flaps_button});
 
-  // =================================================================
-  //  Cockpit Renderer
-  // =================================================================
   auto cockpit_renderer = Renderer(buttons, [&] {
     std::string status = "FLYING";
     Color status_col = Color::Green;
@@ -271,6 +266,9 @@ int main() {
       status_col = Color::Green;
     } else if (plane.crashed) {
       status = "CRASHED";
+      status_col = Color::Red;
+    } else if (plane.fuel == 0) {
+      status = "OUT OF FUEL - GLIDING";
       status_col = Color::Red;
     }
 
@@ -370,15 +368,22 @@ int main() {
           running = false;
           screen.ExitLoopClosure()();
           break;
+
+
         case 'a':
-          plane.throttle = std::max(plane.throttle - 0.05, 0.0);
+          if (plane.fuel > 0.0)
+            plane.throttle = std::max(plane.throttle - 0.05, 0.0);
           break;
+
         case 'd':
-          plane.throttle = std::min(plane.throttle + 0.05, 1.0);
+          if (plane.fuel > 0.0)
+            plane.throttle = std::min(plane.throttle + 0.05, 1.0);
           break;
+
         case 'g':
           plane.gear_down = !plane.gear_down;
           break;
+
         case 'f':
           plane.flaps = !plane.flaps;
           break;
