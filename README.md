@@ -1,5 +1,25 @@
-ftxui-flySim
+# ftxui-flySim
 -------------
+# Demo
+https://github.com/user-attachments/assets/1042cd4b-0c29-4290-ab5d-dc5fcb80217c
+
+
+<img width="1877" height="1011" alt="image" src="https://github.com/user-attachments/assets/13f0f5e5-b005-4d3f-8839-640847f403d4" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+# OLD UI
+
 
 
 ![2025-11-1901-35-20-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/d4665482-1c0c-4585-8834-ae3711591045)
