@@ -1,5 +1,7 @@
-# ftxui-flySim
--------------
+# FTXUI-FlySim
+This project is a fork of the official FTXUI demo repository showcasing FTXUI.
+I didn’t want to deal with linking and debugging FTXUI from scratch, so I directly used and modified the demo fork.
+
 # Demo NEW UI
 https://github.com/user-attachments/assets/1042cd4b-0c29-4290-ab5d-dc5fcb80217c
 
