@@ -4,7 +4,7 @@
 https://github.com/user-attachments/assets/1042cd4b-0c29-4290-ab5d-dc5fcb80217c
 
 
-<img width="1877" height="1011" alt="image" src="https://github.com/user-attachments/assets/13f0f5e5-b005-4d3f-8839-640847f403d4" />
+<img width="1904" height="1026" alt="image" src="https://github.com/user-attachments/assets/18db1281-4662-43d0-b364-24b0f96a38a8" />
 
 
 
@@ -47,7 +47,7 @@ make -j
 ~~~
 # How to Land the Plane
 
-Landing requires putting the aircraft into a stable, low-speed, low-altitude configuration directly over the 2×2 airport zone (marked with X on the map).
+Landing requires putting the aircraft into a stable, low-speed, low-altitude configuration directly over the 2×2 airport zone (marked with pink-Box on the map).
 
 ## Landing Requirements
 
