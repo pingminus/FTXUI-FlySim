@@ -1,6 +1,6 @@
 # ftxui-flySim
 -------------
-# Demo
+# Demo NEW UI
 https://github.com/user-attachments/assets/1042cd4b-0c29-4290-ab5d-dc5fcb80217c
 
 
